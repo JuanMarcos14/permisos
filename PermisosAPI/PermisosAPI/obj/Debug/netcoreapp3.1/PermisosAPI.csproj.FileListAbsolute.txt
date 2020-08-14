@@ -48,3 +48,12 @@ D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\runtimes\un
 D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Projects\Permisos\PermisosAPI\PermisosAPI\obj\Debug\netcoreapp3.1\PermisosAPI.csproj.CopyComplete
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\PermisosAPI.deps.json
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\PermisosAPI.runtimeconfig.json
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\PermisosAPI.runtimeconfig.dev.json
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\PermisosAPI.dll
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\PermisosAPI.pdb
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\obj\Debug\netcoreapp3.1\PermisosAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\obj\Debug\netcoreapp3.1\PermisosAPI.dll
+D:\Projects\Permisos\PermisosAPI\PermisosAPI\obj\Debug\netcoreapp3.1\PermisosAPI.pdb
