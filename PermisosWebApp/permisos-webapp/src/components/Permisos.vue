@@ -34,7 +34,7 @@
             <td>{{ p.fecha | date }}</td>
             <td>
               <b-button v-on:click="Edit(p)" size="sm" class="linkWarning" variant="link">
-                <b-icon icon="pencil"></b-icon> Editar
+                <b-icon icon="pencil"></b-icon>Editar
               </b-button>
               <b-button
                 v-on:click="DeleteConfirmation(p)"
@@ -42,7 +42,7 @@
                 class="linkDanger"
                 variant="link"
               >
-                <b-icon icon="x"></b-icon> Eliminar
+                <b-icon icon="x"></b-icon>Eliminar
               </b-button>
             </td>
           </tr>
@@ -50,15 +50,22 @@
       </table>
       <PermisoForm :permiso="selectedPermiso" />
 
-      <b-modal id="deletePermisoModal" hide-footer
+      <b-modal
+        id="deletePermisoModal"
+        hide-footer
         :header-bg-variant="'danger'"
-        :header-text-variant="'light'">
+        :header-text-variant="'light'"
+      >
         <template v-slot:modal-title>
-          ¿Seguro que desea eliminar el permiso no. {{ selectedPermiso.id }} 
+          ¿Seguro que desea eliminar el permiso no. {{ selectedPermiso.id }}
           del empleado {{ selectedPermiso.nombreEmpleado }} {{ selectedPermiso.apellidosEmpleado }}?
         </template>
-        <b-button variant="light" @click="$bvModal.hide('deletePermisoModal')">Cancelar</b-button> &nbsp; 
-        <b-button variant="danger" v-on:click="Delete" @click="$bvModal.hide('deletePermisoModal')">Eliminar</b-button>
+        <b-button variant="light" @click="$bvModal.hide('deletePermisoModal')">Cancelar</b-button>&nbsp;
+        <b-button
+          variant="danger"
+          v-on:click="Delete"
+          @click="$bvModal.hide('deletePermisoModal')"
+        >Eliminar</b-button>
       </b-modal>
     </b-container>
   </div>
@@ -86,7 +93,8 @@ export default {
   methods: {
     Edit: function (obj) {
       this.selectedPermiso = obj;
-      this.selectedPermiso.fecha = new Date(this.selectedPermiso.fecha);
+      if (this.selectedPermiso.fecha)
+        this.selectedPermiso.fecha = new Date(this.selectedPermiso.fecha);
       this.$bvModal.show("permisoFormModal");
     },
 
@@ -96,10 +104,12 @@ export default {
       });
     },
 
-    Delete: function() {
-        axios.delete(this.BaseUrl + "api/permisos/" + this.selectedPermiso.id).then(() => {
-            this.$bvModal.hide("deletePermisoModal");
-            this.CargarPermisos();
+    Delete: function () {
+      axios
+        .delete(this.BaseUrl + "api/permisos/" + this.selectedPermiso.id)
+        .then(() => {
+          this.$bvModal.hide("deletePermisoModal");
+          this.CargarPermisos();
         });
     },
 
