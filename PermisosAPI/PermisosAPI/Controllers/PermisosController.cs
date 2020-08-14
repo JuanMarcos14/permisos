@@ -15,17 +15,14 @@ namespace PermisosAPI.Controllers
         private readonly PermisosContext db = new PermisosContext();
 
         [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(db.Permisos.Select(p => new { 
-                p.Id,
-                p.NombreEmpleado,
-                p.ApellidosEmpleado,
-                p.Fecha,
-                p.TipoPermisoId,
-                TipoPermiso = p.TipoPermiso.Descripcion
-            }));
-        }
+        public IActionResult Get() =>  Ok(db.Permisos.Select(p => new { 
+                                             p.Id,
+                                             p.NombreEmpleado,
+                                             p.ApellidosEmpleado,
+                                             p.Fecha,
+                                             p.TipoPermisoId,
+                                             TipoPermiso = p.TipoPermiso.Descripcion }));
+        
 
         [HttpPost]
         public IActionResult Post([FromBody] Permiso permiso)
@@ -35,6 +32,14 @@ namespace PermisosAPI.Controllers
             else
                 db.Update(permiso);
 
+            db.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            db.Remove(db.Permisos.Find(id));
             db.SaveChanges();
             return Ok();
         }

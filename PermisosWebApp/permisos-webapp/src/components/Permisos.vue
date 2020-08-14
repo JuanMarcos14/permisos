@@ -9,7 +9,7 @@
         <b-col>
           <br />
           <b-button v-on:click="Edit({})" size="sm" class="float-right" variant="success">
-            <b-icon icon="plus"></b-icon> Agregar
+            <b-icon icon="plus"></b-icon>Agregar
           </b-button>
         </b-col>
       </b-row>
@@ -36,7 +36,12 @@
               <b-button v-on:click="Edit(p)" size="sm" class="linkWarning" variant="link">
                 <b-icon icon="pencil"></b-icon> Editar
               </b-button>
-              <b-button size="sm" class="linkDanger" variant="link">
+              <b-button
+                v-on:click="DeleteConfirmation(p)"
+                size="sm"
+                class="linkDanger"
+                variant="link"
+              >
                 <b-icon icon="x"></b-icon> Eliminar
               </b-button>
             </td>
@@ -44,47 +49,70 @@
         </tbody>
       </table>
       <PermisoForm :permiso="selectedPermiso" />
+
+      <b-modal id="deletePermisoModal" hide-footer
+        :header-bg-variant="'danger'"
+        :header-text-variant="'light'">
+        <template v-slot:modal-title>
+          ¿Seguro que desea eliminar el permiso no. {{ selectedPermiso.id }} 
+          del empleado {{ selectedPermiso.nombreEmpleado }} {{ selectedPermiso.apellidosEmpleado }}?
+        </template>
+        <b-button variant="light" @click="$bvModal.hide('deletePermisoModal')">Cancelar</b-button> &nbsp; 
+        <b-button variant="danger" v-on:click="Delete" @click="$bvModal.hide('deletePermisoModal')">Eliminar</b-button>
+      </b-modal>
     </b-container>
   </div>
 </template>
 
 <script>
-import PermisoForm from './PermisoForm.vue'
+import PermisoForm from "./PermisoForm.vue";
 import axios from "axios";
 
 export default {
   name: "Permisos",
   components: {
-      PermisoForm
+    PermisoForm,
   },
-  data: function() {
-      return {
-          permisos: [],
-          selectedPermiso: {},
-          BaseUrl: 'http://localhost:54614/'
-      }
+  data: function () {
+    return {
+      permisos: [],
+      selectedPermiso: {},
+      BaseUrl: "http://localhost:54614/",
+    };
   },
-  created() { 
-      this.CargarPermisos();
+  created() {
+    this.CargarPermisos();
   },
   methods: {
-      Edit: function (obj) {
-          this.selectedPermiso = obj;
-          this.selectedPermiso.fecha = new Date(this.selectedPermiso.fecha);
-          this.$bvModal.show("permisoFormModal");
-      },
+    Edit: function (obj) {
+      this.selectedPermiso = obj;
+      this.selectedPermiso.fecha = new Date(this.selectedPermiso.fecha);
+      this.$bvModal.show("permisoFormModal");
+    },
 
-      CargarPermisos: function() {
-          axios.get(this.BaseUrl + 'api/permisos').then(response => {
-          this.permisos = response.data;
+    CargarPermisos: function () {
+      axios.get(this.BaseUrl + "api/permisos").then((response) => {
+        this.permisos = response.data;
       });
-      }
+    },
+
+    Delete: function() {
+        axios.delete(this.BaseUrl + "api/permisos/" + this.selectedPermiso.id).then(() => {
+            this.$bvModal.hide("deletePermisoModal");
+            this.CargarPermisos();
+        });
+    },
+
+    DeleteConfirmation: function (obj) {
+      this.selectedPermiso = obj;
+      this.$bvModal.show("deletePermisoModal");
+    },
   },
   mounted() {
-     this.$root.$on('bv::modal::hide', () => {
+    this.$root.$on("bv::modal::hide", () => {
       this.CargarPermisos();
-    })
-  }
+    });
+  },
 };
 </script>
 
